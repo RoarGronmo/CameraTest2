@@ -83,11 +83,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Camera Test 2")
       ),
       body: MyCamera(),
+      /*
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){},
+        onPressed: (){
+          MyCamera().toggleCameraLens();
+        },
         label: Text("Switch"),
         icon: Icon(Icons.cameraswitch_outlined),
       ),
+      */
     );
 
 
