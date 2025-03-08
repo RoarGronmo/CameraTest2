@@ -63,11 +63,22 @@ class _MyCameraState extends State<MyCamera> {
   @override
   Widget build(BuildContext context) {
 
-    return FutureBuilder(
+    return Stack(
+      children: [
+      FutureBuilder(
       future: _initializeControllerFuture,
-      builder: (context, snapshot){
+        builder: (context, snapshot){
         if(snapshot.hasError){
-          return Center(child: Text("Camera Controller Error: ${snapshot.error}"));
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [Card(
+                  color: Colors.red,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Camera Controller Error: ${snapshot.error}",style: TextStyle(color: Colors.yellow),),
+                  )
+              )]
+          );
         }
         if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator());
@@ -79,45 +90,50 @@ class _MyCameraState extends State<MyCamera> {
           return Stack(
             children: [
               SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: CameraPreview(_cameraController!)
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: CameraPreview(_cameraController!)
               ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        OutlinedButton(
-                          onPressed: (){
-                            toggleCameraLens();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.resolveWith<Color>((states){
-                              if(states.contains(WidgetState.disabled)){
-                                return Colors.grey;
-                              }else{
-                                return Colors.white;
-                              }
-                            })
-                          ),
-                          child: const Icon(Icons.cameraswitch_outlined),
-                        )
-                      ]
-                    ),
-                  ),
-                ),
-              )
+
             ],
           );
         }
 
         return Center(child: Text("Camera Connection State: ${snapshot.connectionState.name}"));
       },
+    ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    OutlinedButton(
+                      onPressed: (){
+                        toggleCameraLens();
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.resolveWith<Color>((states){
+                            if(states.contains(WidgetState.disabled)){
+                              return Colors.grey;
+                            }else{
+                              return Colors.white;
+                            }
+                          })
+                      ),
+                      child: const Icon(Icons.cameraswitch_outlined),
+                    )
+                  ]
+              ),
+            ),
+          ),
+        )
+      ],
     );
+
+
   }
 
   void toggleCameraLens(){
