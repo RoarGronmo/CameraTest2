@@ -1,3 +1,4 @@
+import 'package:camera_test2/MyCamera.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -81,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Camera Test 2")
       ),
-      body: Center(child: Text("Camera Test 2"),),
+      body: MyCamera(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){},
         label: Text("Switch"),
