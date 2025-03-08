@@ -41,7 +41,7 @@ class _MyCameraState extends State<MyCamera> {
           print("error 2: Cameras available but could not be read");
         }
         if(globals.currentCamera!=null){
-          _cameraController = CameraController(globals.currentCamera!, ResolutionPreset.medium);
+          _cameraController = CameraController(globals.currentCamera!, ResolutionPreset.ultraHigh);
         }
 
         if(_cameraController!=null){
@@ -166,7 +166,7 @@ class _MyCameraState extends State<MyCamera> {
                                 _selectedCameraIndex = intValue??0;
                                 globals.currentCamera = globals.cameras![_selectedCameraIndex];
 
-                                _cameraController = CameraController(globals.currentCamera!, ResolutionPreset.medium);
+                                _cameraController = CameraController(globals.currentCamera!, ResolutionPreset.ultraHigh);
 
                                 if(_cameraController!=null) {
                                   _initializeControllerFuture = _cameraController!.initialize();
