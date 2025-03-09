@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'globals.dart' as globals;
@@ -13,18 +12,16 @@ class MyCamera extends StatefulWidget{
 
 class _MyCameraState extends State<MyCamera> {
 
-  Function? _setPhotoButtonState;
-
   CameraController? _cameraController;
 
   Future<void>? _initializeControllerFuture;
-  bool _isTaking = false;
+
   late int _selectedCameraIndex;
 
   @override
   void initState() {
     super.initState();
-    _isTaking = false;
+
     _selectedCameraIndex = 0;
 
     availableCameras().then((initCameras){
@@ -53,11 +50,7 @@ class _MyCameraState extends State<MyCamera> {
       }
 
       if(mounted) setState(() {});
-
-
     });
-
-
   }
 
   @override
@@ -132,8 +125,6 @@ class _MyCameraState extends State<MyCamera> {
         )
       ],
     );
-
-
   }
 
   void toggleCameraLens(){
